@@ -4,8 +4,8 @@
   "description": "A mostly reasonable approach to JavaScript.",
   "scripts": {
     "postinstall": "npm run install:config && npm run install:config:base && rm -rf node_modules/markdownlint-cli/node_modules/markdownlint",
-    "install:config": "cd packages/eslint-config-airbnb && npm prune && npm install",
-    "install:config:base": "cd packages/eslint-config-airbnb-base && npm prune && npm install",
+    "install:config": "if [ -d packages/eslint-config-airbnb ]; then cd packages/eslint-config-airbnb && npm install; elif [ -d package/packages/eslint-config-airbnb ]; then cd package/packages/eslint-config-airbnb && npm install; else echo 'config skipped'; fi",
+    "install:config:base": "if [ -d packages/eslint-config-airbnb-base ]; then cd packages/eslint-config-airbnb-base && npm install; elif [ -d package/packages/eslint-config-airbnb-base ]; then cd package/packages/eslint-config-airbnb-base && npm install; else echo 'config:base skipped'; fi",
     "lint": "markdownlint --config linters/.markdownlint.json README.md */README.md",
     "pretest": "npm run --silent lint",
     "test": "npm run --silent test:config && npm run --silent test:config:base",
